@@ -1,7 +1,6 @@
 package miniprog
 
 import (
-	"fmt"
 	"io"
 	"net/url"
 	"reflect"
@@ -23,11 +22,9 @@ func structToValues(i interface{}) url.Values {
 	v := url.Values{}
 	if i != nil {
 		iVal := reflect.ValueOf(i).Elem()
-		fmt.Println(iVal)
 		tp := iVal.Type()
 		for i := 0; i < iVal.NumField(); i++ {
 			tag := tp.Field(i).Tag.Get("json")
-			fmt.Println(tag)
 			if len(tag) > 0 {
 				name := strings.Split(tag, ",")[0]
 				if name != "-" {
